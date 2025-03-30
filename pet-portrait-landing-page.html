@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelby's Pet Portraits | Handpainted Custom Art</title>
+    <style>
+        :root {
+            --primary: #c4e0f9;
+            --secondary: #f2d5f8;
+            --accent: #ffb7c3;
+            --light: #fbf8f6;
+            --dark: #4a3b45;
+            --text: #5d4e56;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --pastel-green: #d1f0c2;
+            --pastel-yellow: #fff8d9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(74, 59, 69, 0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 550px;
+            padding: 80px 0;
+            background: linear-gradient(45deg, var(--pastel-yellow) 0%, var(--light) 100%);
+            border-radius: 0 0 60px 60px;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 60px;
+        }
+        
+        .hero-images {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            position: relative;
+        }
+        
+        .hero-images:before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            z-index: -1;
+            top: -20px;
+            left: -30px;
+            opacity: 0.5;
+        }
+        
+        .hero-images:after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: var(--pastel-green);
+            border-radius: 50%;
+            z-index: -1;
+            bottom: -20px;
+            right: -20px;
+            opacity: 0.5;
+        }
+        
+        .portrait-sample {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            height: 250px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+        
+        .portrait-sample:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+        
+        .portrait-sample img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portrait-sample:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portrait-sample:nth-child(odd) {
+            transform: rotate(-2deg);
+        }
+        
+        .portrait-sample:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .portrait-sample:nth-child(odd):hover {
+            transform: rotate(-2deg) translateY(-10px);
+        }
+        
+        .portrait-sample:nth-child(even):hover {
+            transform: rotate(2deg) translateY(-10px);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            background-color: #ff9aac;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #eabdf0;
+        }
+        
+        .handmade-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .handmade-badge span {
+            margin-left: 10px;
+            font-weight: 600;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .order-section {
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            padding: 60px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .order-section:before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            z-index: 0;
+            top: -100px;
+            right: -100px;
+            opacity: 0.3;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark);
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            z-index: 1;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .brush-stroke {
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            background-color: var(--secondary);
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.5;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .order-process {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .order-process:after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+            top: 35px;
+            left: 15%;
+            right: 15%;
+            z-index: -1;
+        }
+        
+        .step {
+            text-align: center;
+            flex: 1;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--dark);
+            font-size: 24px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            box-shadow: var(--shadow);
+        }
+        
+        .step h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .size-selection {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .size-option {
+            flex-basis: 32%;
+            padding: 30px 25px;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .size-option:hover, .size-option.selected {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .size-option.selected:before {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 25px;
+            height: 25px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .size-option:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .size-option:hover:after, .size-option.selected:after {
+            opacity: 1;
+        }
+        
+        .size-option h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+        
+        .size-option svg {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 15px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .details {
+            font-size: 0.95rem;
+            color: #777;
+        }
+        
+        .upload-section {
+            margin: 50px 0;
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(196, 224, 249, 0.1);
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .upload-section:before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: var(--pastel-green);
+            border-radius: 50%;
+            z-index: -1;
+            bottom: -30px;
+            right: -30px;
+            opacity: 0.2;
+        }
+        
+        .file-upload {
+            display: none;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .upload-btn:hover {
+            background-color: #addaf6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .uploaded-preview {
+            max-width: 300px;
+            max-height: 300px;
+            margin: 25px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            display: none;
+            box-shadow: var(--shadow);
+            border: 5px solid white;
+        }
+        
+        .uploaded-preview img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .customer-info {
+            margin: 50px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            background-color: rgba(255,255,255,0.8);
+        }
+        
+        input:focus, textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(242, 213, 248, 0.2);
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            color: white;
+            font-size: 1.2rem;
+            padding: 18px 40px;
+            margin-top: 30px;
+            display: block;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .checkout-btn:hover {
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+        }
+        
+        .testimonials {
+            padding: 80px 0;
+            background-color: rgba(209, 240, 194, 0.2);
+            border-radius: 30px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials:before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            z-index: 0;
+            bottom: -100px;
+            left: -100px;
+            opacity: 0.2;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .testimonial:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--primary);
+            opacity: 0.3;
+            font-family: 'Playfair Display', serif;
+            line-height: 0;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .customer {
+            display: flex;
+            align-items: center;
+        }
+        
+        .customer-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .customer-name {
+            font-weight: 600;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .rating {
+            color: #FFD700;
+            margin-top: 5px;
+        }
+        
+        .about-artist {
+            display: flex;
+            align-items: center;
+            margin: 80px 0;
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .artist-image {
+            flex: 1;
+            height: 500px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        
+        .artist-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .artist-bio {
+            flex: 1;
+            padding: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .artist-bio:before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: var(--pastel-yellow);
+            border-radius: 50%;
+            z-index: -1;
+            top: -30px;
+            right: -30px;
+            opacity: 0.3;
+        }
+        
+        .artist-bio h2 {
+            margin-bottom: 20px;
+        }
+        
+        .signature {
+            font-family: 'Parisienne', cursive;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-top: 30px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 40px;
+            border-radius: 30px 30px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            flex-basis: 30%;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3:after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .footer-section p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin-right: 15px;
+            font-size: 22px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Art elements */
+        .paint-splash {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .splash1 {
+            top: 100px;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background-color: var(--accent);
+            border-radius: 50% 20% 50% 40%;
+            transform: rotate(45deg);
+        }
+        
+        .splash2 {
+            bottom: 10%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary);
+            border-radius: 60% 40% 30% 70%;
+            transform: rotate(-20deg);
+        }
+        
+        .brush-stroke1 {
+            position: absolute;
+            width: 200px;
+            height: 30px;
+            background-color: var(--pastel-green);
+            top: 30%;
+            right: 0;
+            border-radius: 20px;
+            transform: rotate(-45deg);
+            opacity: 0.2;
+        }
+        
+        .brush-stroke2 {
+            position: absolute;
+            width: 150px;
+            height: 20px;
+            background-color: var(--secondary);
+            bottom: 20%;
+            left: 10%;
+            border-radius: 20px;
+            transform: rotate(30deg);
+            opacity: 0.2;
+        }
+        
+        .art-tools {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            opacity: 0.2;
+        }
+        
+        .brush {
+            width: 5px;
+            height: 60px;
+            background-color: var(--dark);
+            border-radius: 2px;
+            margin-right: 10px;
+            position: relative;
+        }
+        
+        .brush:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background-color: var(--accent);
+            top: -10px;
+            left: -2.5px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-artist {
+                flex-direction: column;
+            }
+            
+            .artist-image {
+                height: 300px;
+            }
+            
+            .footer-section {
+                flex-basis: 45%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                padding: 60px 0;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 60px;
+                text-align: center;
+            }
+            
+            .order-process {
+                flex-direction: column;
+            }
+            
+            .order-process:after {
+                display: none;
+            }
+            
+            .step {
+                margin-bottom: 40px;
+            }
+            
+            .size-option {
+                flex-basis: 100%;
+            }
+            
+            .order-section {
+                padding: 40px 20px;
+            }
+            
+            .footer-section {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Shelby's <span>Pet Portraits</span></div>
+            <a href="#order" class="btn btn-secondary">Order Now</a>
+        </header>
+        
+        <section class="hero">
+            <div class="paint-splash splash1"></div>
+            <div class="paint-splash splash2"></div>
+            <div class="brush-stroke1"></div>
+            <div class="brush-stroke2"></div>
+            
+            <div class="hero-content">
+                <div class="handmade-badge">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>100% Handpainted Artistry</span>
+                </div>
+                <h1>Turn Memories Into Timeless Art</h1>
+                <h2>Hand-crafted pet portraits with soul</h2>
+                <p>Each portrait is lovingly created by hand using premium artist-grade materials. I capture not just your pet's likeness, but their unique personality and spirit that makes them special to you.</p>
+                <a href="#order" class="btn">Commission Your Portrait</a>
+            </div>
+            <div class="hero-images">
+                <div class="portrait-sample">
+                    <img src="/api/placeholder/400/320" alt="Golden retriever portrait">
+                </div>
+                <div class="portrait-sample">
+                    <img src="/api/placeholder/400/320" alt="Tabby cat portrait">
+                </div>
+                <div class="portrait-sample">
+                    <img src="/api/placeholder/400/320" alt="French bulldog portrait">
+                </div>
+                <div class="portrait-sample">
+                    <img src="/api/placeholder/400/320" alt="Parrot portrait">
+                </div>
+            </div>
+        </section>
+        
+        <section id="order" class="order-section">
+            <div class="paint-splash" style="top: 20%; right: 5%; background-color: var(--pastel-yellow); border-radius: 60% 40% 70% 30%; width: 120px; height: 120px;"></div>
+            
+            <h2 class="section-title">Commission Your Custom Portrait
+                <div class="brush-stroke"></div>
+            </h2>
+            
+            <div class="order-process">
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <h3>Select Size & Style</h3>
+                    <p>Choose the perfect canvas for your pet's portrait</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <h3>Upload Photo</h3>
+                    <p>Share a clear image that captures your pet's personality</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <h3>Artist Creation</h3>
+                    <p>I'll bring your pet to life with my artistic touch</p>
+                </div>
+            </div>
+            
+            <h3>Select Your Portrait Size</h3>
+            <div class="size-selection">
+                <div class="size-option" onclick="selectSize(this, 'small')">
+                    <i class="fas fa-square" style="font-size: 30px;"></i>
+                    <h3>Petite</h3>
+                    <p>8" x 10"</p>
+                    <div class="price">$95</div>
+                    <p class="details">Perfect for desktops or small wall spaces</p>
+                </div>
+                <div class="size-option" onclick="selectSize(this, 'medium')">
+                    <i class="fas fa-square" style="font-size: 36px;"></i>
+                    <h3>Classic</h3>
+                    <p>11" x 14"</p>
+                    <div class="price">$135</div>
+                    <p class="details">Ideal as a statement piece for shelves or walls</p>
+                </div>
+                <div class="size-option" onclick="selectSize(this, 'large')">
+                    <i class="fas fa-square" style="font-size: 42px;"></i>
+                    <h3>Grand</h3>
+                    <p>16" x 20"</p>
+                    <div class="price">$185</div>
+                    <p class="details">A breathtaking centerpiece for your space</p>
+                </div>
+            </div>
+            
+            <div class="upload-section">
+                <h3>Share Your Pet's Photo</h3>
+                <p>Please upload a clear, well-lit photo that showcases your pet's personality. Front-facing photos typically work best, but I can work with your favorite image.</p>
+                <input type="file" id="pet-photo" class="file-upload" accept="image/*" onchange="previewImage(event)">
+                <label for="pet-photo" class="upload-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Upload Your Photo
+                </label>
+                <div class="uploaded-preview" id="preview-container">
+                    <img id="preview-image" src="" alt="Your pet">
+                </div>
+                <p id="file-name" style="font-style: italic; color: #777;"></p>
+            </div>
+            
+            <div class="customer-info">
+                <h3>Your Details</h3>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="For order updates and communication">
+                </div>
+                <div class="form-group">
+                    <label for="pet-name">Pet's Name</label>
+                    <input type="text" id="pet-name" placeholder="What's your pet's name?">
+                </div>
+                <div class="form-group">
+                    <label for="special-requests">Special Requests or Notes</label>
+                    <textarea id="special-requests" rows="4" placeholder="Share any specific details, background preferences, or special stories about your pet that might help me capture their essence..."></textarea>
+                </div>
+            </div>
+            
+            <button class="btn checkout-btn">Complete Your Commission</button>
+        </section>
+        
+        <section class="about-artist">
+            <div class="artist-image">
+                <img src="/api/placeholder/400/320" alt="Shelby in her studio">
+            </div>
+            <div class="artist-bio">
+                <h2>Meet Shelby</h2>
+                <p>Hello, I'm Shelby! As a lifelong animal lover and artist, creating pet portraits isn't just my profession—it's my passion. Each portrait I create is a labor of love, using premium materials and techniques that bring your beloved companions to life on canvas.</p>
+                <p>My artistic journey began over a decade ago, and I've since dedicated myself to perfecting the art of capturing the unique personalities, expressions, and souls of the pets I paint. I believe that a truly special portrait doesn't just look like your pet—it feels like them too.</p>
+                <p>When I'm not in my studio painting, you'll find me volunteering at local animal shelters or spending time with my own furry muses: my rescue dog Bailey and cats Oliver and Luna.</p>
+                <div class="signature">Shelby</div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <div class="paint-splash" style="bottom: 10%; right: 5%; background-color: var(--primary); border-radius: 40% 60% 30% 70%; width: 100px; height: 100px;"></div>
+            
+            <h2 class="section-title">Words From Happy Pet Parents</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "Shelby captured my golden retriever Jasper's personality perfectly. The portrait shows his playful spirit and those soulful eyes I love so much. It's now the centerpiece of our living room and brings me joy every day."
+                    </div>
+                    <div class="customer">
+                        <div class="customer-img">
+                            <img src="/api/placeholder/60/60" alt="Sarah J">
+                        </div>
+                        <div>
+                            <div class="customer-name">Sarah J.</div>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "I commissioned a portrait of our cat Milo as an anniversary gift for my wife. When she opened it, she was moved to tears. Shelby didn't just paint a cat—she captured our beloved family member in all his quirky glory."
+                    </div>
+                    <div class="customer">
+                        <div class="customer-img">
+                            <img src="/api/placeholder/60/60" alt="Michael T">
+                        </div>
+                        <div>
+                            <div class="customer-name">Michael T.</div>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "After our beloved dog Luna passed away, we wanted something special to remember her by. Shelby's portrait captured not just how Luna looked, but her gentle spirit that we miss every day. It's our most treasured keepsake."
+                    </div>
+                    <div class="customer">
+                        <div class="customer-img">
+                            <img src="/api/placeholder/60/60" alt="Emma L">
+                        </div>
+                        <div>
+                            <div class="customer-name">Emma L.</div>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="process-gallery">
+            <h2 class="section-title">The Artistic Process</h2>
+            <div class="art-tools">
+                <div class="brush"></div>
+                <div class="brush" style="height: 50px;"></div>
+                <div class="brush" style="height: 70px;"></div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shelby's Pet Portraits</h3>
+                    <p>Turning cherished memories into handcrafted works of art that celebrate the special bond between you and your pet.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Commission Process</a></p>
+                    <p><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">FAQs</a></p>
+                    <p><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Gallery</a></p>
+                    <p><a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="far fa-envelope" style="margin-right: 10px;"></i> hello@shelbypetportraits.com</p>
+                    <p><i class="fab fa-tiktok" style="margin-right: 10px;"></i> @ShelbysPetPortraits</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Shelby's Pet Portraits. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function selectSize(element, size) {
+            // Remove selected class from all options
+            const options = document.querySelectorAll('.size-option');
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // You can store the selected size in a variable or hidden input
+            console.log('Selected size:', size);
+        }
+        
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewContainer = document.getElementById('preview-container');
+                    const previewImage = document.getElementById('preview-image');
+                    const fileName = document.getElementById('file-name');
+                    
+                    previewImage.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    fileName.textContent = file.name;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

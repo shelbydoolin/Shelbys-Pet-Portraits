@@ -1,0 +1,29 @@
+{
+  "name": "shelbys-pet-portraits",
+  "version": "1.0.0",
+  "description": "Commission site for Shelby's Pet Portraits",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.0",
+    "stripe": "^12.18.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "Shelby's Pet Portraits",
+  "license": "UNLICENSED",
+  "private": true
+}

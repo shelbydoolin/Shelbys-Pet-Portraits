@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Shelby's Pet Portraits</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&family=Dancing+Script:wght@400;500;600&family=Great+Vibes&family=Petit+Formal+Script&family=Alex+Brush&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .comparison-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-item {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .comparison-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .comparison-wrapper {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+        
+        .before-image, .after-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Enhanced fix for the golden retriever photo scaling */
+        .comparison-wrapper.golden-fix .before-image {
+            object-fit: cover;
+            object-position: center 40%;
+            background-color: white;
+        }
+        
+        .comparison-wrapper.golden-fix .after-image {
+            object-position: center;
+        }
+        
+        .before-image {
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        }
+        
+        .comparison-slider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            transform: translateX(-50%);
+            z-index: 10;
+            cursor: ew-resize;
+        }
+        
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            font-size: 16px;
+        }
+        
+        .comparison-caption {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .caption-before, .caption-after {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--primary);
+            position: relative;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+        
+        .caption-before {
+            background-color: #f0f0f0;
+        }
+        
+        .caption-after {
+            background-color: var(--primary-light);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .logo {
+            font-family: 'Alex Brush', cursive;
+            font-size: 52px;
+            font-weight: 400;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .logo span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: #333;
+            position: relative;
+        }
+        
+        .logo span::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            width: 2px;
+            height: 70%;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="logo">Shelby's <span>Pet Portraits</span></div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="commission-process.html">Process</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="commission.html" class="btn btn-secondary">Order Now</a>
+        </header>
+        
+        <section class="page-content">
+            <h1 class="section-title">Gallery of Pet Portraits</h1>
+            
+            <div class="content-box">
+                <p>Explore my collection of recent pet portrait commissions. Slide the divider to see the transformation from photo to portrait. Each piece is created with care and attention to detail, capturing the unique personality of each beloved companion.</p>
+                
+                <div class="gallery-grid">
+                    <div class="comparison-item">
+                        <div class="comparison-container">
+                            <div class="comparison-wrapper golden-fix">
+                                <img src="../images/gallery-dog-portrait-1.jpg" alt="Golden Retriever portrait" class="after-image">
+                                <img src="../images/reference-photos/golden-photo.jpg" alt="Golden Retriever photo" class="before-image">
+                                <div class="comparison-slider" id="slider1">
+                                    <div class="slider-button">
+                                        <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-caption">
+                                <div class="caption-before">Original Photo</div>
+                                <div class="caption-after">Hand-painted Portrait</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-item">
+                        <div class="comparison-container">
+                            <div class="comparison-wrapper">
+                                <img src="../images/gallery-dog-portrait-2.jpg" alt="Border Collie portrait" class="after-image">
+                                <img src="../images/reference-photos/collie-photo.jpg" alt="Border Collie photo" class="before-image">
+                                <div class="comparison-slider" id="slider2">
+                                    <div class="slider-button">
+                                        <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-caption">
+                                <div class="caption-before">Original Photo</div>
+                                <div class="caption-after">Hand-painted Portrait</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-item">
+                        <div class="comparison-container">
+                            <div class="comparison-wrapper">
+                                <img src="../images/gallery-dog-portrait-3.jpg" alt="German Shepherd portrait" class="after-image">
+                                <img src="../images/reference-photos/shepherd-photo.jpg" alt="German Shepherd photo" class="before-image">
+                                <div class="comparison-slider" id="slider3">
+                                    <div class="slider-button">
+                                        <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-caption">
+                                <div class="caption-before">Original Photo</div>
+                                <div class="caption-after">Hand-painted Portrait</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-item">
+                        <div class="comparison-container">
+                            <div class="comparison-wrapper">
+                                <img src="../images/gallery-cat-portrait-1.jpg" alt="Tabby cat portrait" class="after-image">
+                                <img src="../images/reference-photos/tabby-photo.jpg" alt="Tabby cat photo" class="before-image">
+                                <div class="comparison-slider" id="slider4">
+                                    <div class="slider-button">
+                                        <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-caption">
+                                <div class="caption-before">Original Photo</div>
+                                <div class="caption-after">Hand-painted Portrait</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-item">
+                        <div class="comparison-container">
+                            <div class="comparison-wrapper">
+                                <img src="../images/gallery-bulldog-portrait.jpg" alt="Bulldog portrait" class="after-image">
+                                <img src="../images/reference-photos/bulldog-photo.jpg" alt="Bulldog photo" class="before-image">
+                                <div class="comparison-slider" id="slider5">
+                                    <div class="slider-button">
+                                        <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-caption">
+                                <div class="caption-before">Original Photo</div>
+                                <div class="caption-after">Hand-painted Portrait</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-item">
+                        <div class="comparison-container">
+                            <div class="comparison-wrapper">
+                                <img src="../images/gallery-dog-portrait-4.jpg" alt="Additional Dog portrait" class="after-image">
+                                <img src="../images/reference-photos/additional-dog-photo.jpg" alt="Additional Dog photo" class="before-image">
+                                <div class="comparison-slider" id="slider6">
+                                    <div class="slider-button">
+                                        <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-caption">
+                                <div class="caption-before">Original Photo</div>
+                                <div class="caption-after">Hand-painted Portrait</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-box">
+                    <h3>Ready to Commission Your Own Pet Portrait?</h3>
+                    <p>I'd be honored to create a special keepsake of your beloved companion. Each portrait is created with care and attention to capture your pet's unique personality.</p>
+                    <a href="commission.html" class="btn">Start Your Commission</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shelby's Pet Portraits</h3>
+                    <p>Turning cherished memories into handcrafted works of art that celebrate the special bond between you and your pet.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow on TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="commission-process.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Commission Process</a></p>
+                    <p><a href="faqs.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">FAQs</a></p>
+                    <p><a href="gallery.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Gallery</a></p>
+                    <p><a href="contact.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="far fa-envelope" style="margin-right: 10px;"></i> hello@shelbypetportraits.com</p>
+                    <p><i class="fab fa-tiktok" style="margin-right: 10px;"></i> @ShelbysPetPortraits</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Shelby's Pet Portraits. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../js/scripts.js"></script>
+    <script>
+        // Before-after slider functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliders = document.querySelectorAll('.comparison-slider');
+            
+            sliders.forEach(slider => {
+                const container = slider.closest('.comparison-wrapper');
+                const beforeImage = container.querySelector('.before-image');
+                
+                function moveSlider(e) {
+                    let position = e.clientX - container.getBoundingClientRect().left;
+                    let percentage = (position / container.offsetWidth) * 100;
+                    
+                    // Ensure the slider stays within bounds
+                    if (percentage < 5) percentage = 5;
+                    if (percentage > 95) percentage = 95;
+                    
+                    // Update slider position
+                    slider.style.left = `${percentage}%`;
+                    
+                    // Update clip-path for before image
+                    beforeImage.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+                }
+                
+                // Mouse events
+                slider.addEventListener('mousedown', () => {
+                    container.addEventListener('mousemove', moveSlider);
+                });
+                
+                container.addEventListener('mouseup', () => {
+                    container.removeEventListener('mousemove', moveSlider);
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    container.removeEventListener('mousemove', moveSlider);
+                });
+                
+                // Touch events for mobile
+                slider.addEventListener('touchstart', () => {
+                    container.addEventListener('touchmove', function(e) {
+                        const touch = e.touches[0];
+                        e.clientX = touch.clientX;
+                        moveSlider(e);
+                        e.preventDefault(); // Prevent scrolling while dragging
+                    });
+                });
+                
+                container.addEventListener('touchend', () => {
+                    container.removeEventListener('touchmove', moveSlider);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

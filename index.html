@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelby's Pet Portraits | Handpainted Custom Art</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Custom hand-painted pet portraits by Shelby. Transform your cherished pet photos into timeless works of art. Professional artist specializing in dogs and cats.">
+    <meta name="keywords" content="pet portraits, custom pet art, hand painted portraits, dog portraits, cat portraits, custom artwork, pet memorial art">
+    <meta name="author" content="Shelby's Pet Portraits">
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Shelby's Pet Portraits | Handpainted Custom Art">
+    <meta property="og:description" content="Transform your cherished pet photos into timeless works of art. Professional hand-painted pet portraits by Shelby.">
+    <meta property="og:image" content="images/hero-dog-portrait.jpg">
+    <meta property="og:url" content="https://shelbypetportraits.com">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shelby's Pet Portraits | Handpainted Custom Art">
+    <meta name="twitter:description" content="Transform your cherished pet photos into timeless works of art. Professional hand-painted pet portraits by Shelby.">
+    <meta name="twitter:image" content="images/hero-dog-portrait.jpg">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&family=Alex+Brush&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Stripe JavaScript library -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <div class="loading-overlay">
+        <div class="loader"></div>
+        <p>Loading your art gallery...</p>
+    </div>
+    <div class="container">
+        <header class="main-header">
+            <div class="logo" style="font-family: 'Alex Brush', cursive; font-size: 52px; font-weight: 400; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 5px;">Shelby's <span style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: #333; position: relative;">Pet Portraits</span></div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="pages/gallery.html">Gallery</a></li>
+                    <li><a href="pages/commission-process.html">Process</a></li>
+                    <li><a href="pages/faqs.html">FAQs</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="pages/commission.html" class="btn btn-secondary">Order Now</a>
+        </header>
+        
+        <section class="hero">
+            <div class="paint-splash splash1"></div>
+            <div class="paint-splash splash2"></div>
+            <div class="brush-stroke1"></div>
+            <div class="brush-stroke2"></div>
+            
+            <div class="hero-content">
+                <div class="handmade-badge">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>100% Handpainted Artistry</span>
+                </div>
+                <h1>Turn Memories Into Timeless Art</h1>
+                <h2>Hand-crafted pet portraits with soul</h2>
+                <p>Each portrait is lovingly created by hand using premium artist-grade materials. I capture not just your pet's likeness, but their unique personality and spirit that makes them special to you.</p>
+                <div class="hero-cta">
+                    <a href="pages/commission.html" class="btn btn-primary">Commission Your Portrait</a>
+                    <a href="pages/gallery.html" class="btn btn-secondary">View Gallery</a>
+                </div>
+            </div>
+            <div class="hero-images">
+                <div class="portrait-sample">
+                    <img src="images/gallery-dog-portrait-1.jpg" alt="Chocolate Lab portrait">
+                </div>
+                <div class="portrait-sample">
+                    <img src="images/gallery-dog-portrait-4.jpg" alt="Dog with bandana portrait">
+                </div>
+                <div class="portrait-sample">
+                    <img src="images/hero-bulldog-portrait.jpg" alt="French bulldog portrait">
+                </div>
+            </div>
+        </section>
+        
+        <section class="commission">
+            <div class="container">
+                <div class="commission-content">
+                    <h2>Ready to Preserve Your Pet's Personality?</h2>
+                    <p>Each portrait is carefully crafted to capture your pet's unique personality and spirit.</p>
+                    
+                    <div class="commission-cta">
+                        <a href="pages/commission.html" class="btn btn-primary btn-large">Start Your Commission</a>
+                        <p class="commission-note">Custom portraits starting at $299</p>
+                    </div>
+                    
+                    <div class="commission-features">
+                        <div class="feature">
+                            <i class="fas fa-paint-brush"></i>
+                            <h3>Premium Materials</h3>
+                            <p>Professional-grade paints and archival paper ensure your portrait lasts for generations.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shipping-fast"></i>
+                            <h3>Free Shipping</h3>
+                            <p>Your portrait is carefully packaged and shipped to your door free of charge.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-redo-alt"></i>
+                            <h3>Satisfaction Guaranteed</h3>
+                            <p>Your satisfaction is our top priority, ensuring you'll love your custom portrait.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="about-artist about-no-image">
+            <div class="artist-bio">
+                <h2>Meet Shelby</h2>
+                <p>My journey as a pet portrait artist began with a simple desire to capture the unique personalities of our beloved companions. What started as a hobby has blossomed into a passion, allowing me to combine my love for animals with my artistic talents.</p>
+                
+                <p>Each portrait I create is more than just a painting – it's a celebration of the special bond between pets and their families. I pour my heart into every brushstroke, ensuring that each piece captures not just the physical likeness, but the true essence of your pet's personality.</p>
+                
+                <p>I believe that every pet has a story worth telling, and I'm honored to be able to help tell those stories through my art. Whether it's capturing the playful spirit of a puppy, the dignified presence of an older dog, or the mysterious charm of a cat, each portrait is a unique tribute to a beloved family member.</p>
+                <div class="signature">Shelby</div>
+            </div>
+        </section>
+        
+        <section class="process-timeline">
+            <h2 class="section-title">The Artistic Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h3>Initial Consultation</h3>
+                        <p>Share your favorite photos of your pet, along with any specific details about their personality and special features you'd like highlighted.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h3>Final Review</h3>
+                        <p>You'll receive photos of the completed portrait for your review and approval before shipping.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h3>Delivery</h3>
+                        <p>Your finished portrait is carefully packaged and shipped to your door, ready to be displayed and cherished for years to come.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <div class="paint-splash" style="bottom: 10%; right: 5%; background-color: var(--primary); border-radius: 40% 60% 30% 70%; width: 100px; height: 100px;"></div>
+            
+            <h2 class="section-title">Words From Happy Pet Parents</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "Beautiful painting. Exactly as described. Will make for the perfect gift!"
+                    </div>
+                    <div class="customer">
+                        <div class="customer-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div>
+                            <div class="customer-name">Renee D.</div>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "Shelby is truly such a talent, and I have absolutely adored every piece shes ever created for me! Cannot recommend enough. She captures the most special, small details of your pet and really brings them to life. She's the best!"
+                    </div>
+                    <div class="customer">
+                        <div class="customer-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div>
+                            <div class="customer-name">Amber B.</div>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "WOW did this turn out beautifully! Shelby somehow fit so much detail and personalization into a painting the size of an ornament. Fast turnaround time and very friendly service. 10/10! Will definitely be considering for future gifts"
+                    </div>
+                    <div class="customer">
+                        <div class="customer-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div>
+                            <div class="customer-name">Tiffany D.</div>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="process-gallery">
+            <h2 class="section-title">The Artistic Process</h2>
+            <div class="art-tools">
+                <div class="brush"></div>
+                <div class="brush" style="height: 50px;"></div>
+                <div class="brush" style="height: 70px;"></div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shelby's Pet Portraits</h3>
+                    <p>Turning cherished memories into handcrafted works of art that celebrate the special bond between you and your pet.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow on TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="pages/commission-process.html">Commission Process</a></li>
+                        <li><a href="pages/faqs.html">FAQs</a></li>
+                        <li><a href="pages/gallery.html">Gallery</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: shelbyspetpaintings@gmail.com</p>
+                    <p>Location: Atlanta, Georgia</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Shelby's Pet Portraits. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="pages/privacy-policy.html">Privacy Policy</a>
+                    <a href="pages/terms.html">Terms of Service</a>
+                    <a href="pages/cookie-policy.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/scripts.js"></script>
+</body>
+</html> 

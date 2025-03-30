@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission a Portrait | Shelby's Pet Portraits</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&family=Dancing+Script:wght@400;500;600&family=Great+Vibes&family=Petit+Formal+Script&family=Alex+Brush&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        :root {
+            --soft-pink: #f8e1e7;
+            --light-purple: #f0ebfa;
+            --pastel-blue: #e1f2f8;
+            --primary-light: #e3d5f2;
+        }
+
+        body {
+            background-color: #fafafa;
+            background-image: linear-gradient(135deg, #fff 0%, #f9f5ff 100%);
+            min-height: 100vh;
+        }
+        
+        .commission-form-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0px 8px 30px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(178, 132, 190, 0.1);
+        }
+        
+        .paint-splash {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            opacity: 0.07;
+            transform: translate(-50%, -50%);
+            filter: blur(20px);
+        }
+        
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .form-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            color: #777;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .full-width {
+            grid-column: span 2;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 15px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(178, 132, 190, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+        
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .size-btn {
+            flex: 1;
+            padding: 20px 15px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+        
+        .size-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: #d8c0e7;
+        }
+        
+        .size-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(178, 132, 190, 0.2);
+            background-color: #fcfaff;
+        }
+        
+        .size-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .size-dimension {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 12px;
+        }
+        
+        .size-price {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary);
+            margin-top: auto;
+        }
+        
+        .submission-note {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(246, 242, 240, 0.5);
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #555;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .process-reminder {
+            background-color: #f8f5ff;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .process-reminder h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .process-reminder ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .process-reminder li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary), #a36fb5);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(178, 132, 190, 0.2);
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #a36fb5, var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(178, 132, 190, 0.3);
+        }
+        
+        .upload-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background-color: #f8f5ff;
+            border: 1px dashed var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-btn:hover {
+            background-color: #f0ebfa;
+            border-color: #a36fb5;
+        }
+        
+        .upload-icon {
+            font-size: 20px;
+            color: var(--primary);
+        }
+        
+        .upload-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--primary);
+        }
+        
+        .uploaded-file {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 15px;
+            background-color: #f0ebfa;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--primary);
+        }
+        
+        .file-name {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        
+        .remove-file {
+            color: #d32f2f;
+            cursor: pointer;
+        }
+        
+        .form-footer {
+            font-size: 14px;
+            color: #777;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        /* Stripe Elements style */
+        .StripeElement {
+            padding: 15px 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+        }
+        
+        .StripeElement--focus {
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(178, 132, 190, 0.1);
+        }
+        
+        .StripeElement--invalid {
+            border-color: #fa755a;
+        }
+        
+        #card-errors {
+            color: #fa755a;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .card-icon {
+            margin-left: 8px;
+            color: #6772e5;
+            font-size: 18px;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            color: #6c757d;
+            font-size: 13px;
+        }
+        
+        .price-display {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background-color: #fcfaff;
+            border-radius: 10px;
+            border: 1px solid rgba(178, 132, 190, 0.1);
+        }
+        
+        .authorization-note {
+            background-color: #fff8f0;
+            border-left: 4px solid #ffb74d;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .authorization-note h3 {
+            font-family: 'Playfair Display', serif;
+            color: #e65100;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        #payment-error {
+            display: none;
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 992px) {
+            .size-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .full-width {
+                grid-column: span 1;
+            }
+            
+            .size-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .commission-form-container {
+                padding: 25px;
+                margin: 20px auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .size-options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .logo {
+            font-family: 'Alex Brush', cursive;
+            font-size: 52px;
+            font-weight: 400;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .logo span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: #333;
+            position: relative;
+        }
+        
+        .logo span::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            width: 2px;
+            height: 70%;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="logo" style="font-family: 'Alex Brush', cursive; font-size: 52px; font-weight: 400; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 5px;">Shelby's <span style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: #333; position: relative;">Pet Portraits</span></div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="commission-process.html">Process</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="commission.html" class="btn btn-secondary active">Order Now</a>
+        </header>
+        
+        <section class="page-content">
+            <div class="commission-form-container">
+                <div class="paint-splash" style="top: 10%; left: 15%; background-color: var(--pastel-blue);"></div>
+                <div class="paint-splash" style="bottom: 20%; right: 15%; background-color: var(--soft-pink);"></div>
+                <div class="paint-splash" style="top: 60%; left: 80%; background-color: var(--light-purple);"></div>
+                
+                <h1 class="form-title">Commission Your Pet Portrait</h1>
+                <p class="form-subtitle">Fill out the form below to start your custom pet portrait journey</p>
+                
+                <div id="payment-error"></div>
+                
+                <form id="commissionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="petName">Pet's Name *</label>
+                            <input type="text" id="petName" name="petName" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="petPhoto">Upload a Photo of Your Pet *</label>
+                            <div class="upload-btn" id="uploadBtn">
+                                <span class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                                <span class="upload-text">Click to choose a file or drag and drop</span>
+                            </div>
+                            <input type="file" id="petPhoto" name="petPhoto" accept="image/*" style="display: none;" required>
+                            <div class="uploaded-file" id="uploadedFile">
+                                <span class="file-name" id="fileName"></span>
+                                <span class="remove-file" id="removeFile"><i class="fas fa-times"></i> Remove</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label>Select Portrait Size *</label>
+                            <div class="size-options">
+                                <div class="size-btn" data-size="xs" onclick="selectSize('xs')">
+                                    <div class="size-name">Petite Studio Portrait</div>
+                                    <div class="size-dimension">6x6 inches</div>
+                                    <div class="size-price">$200.00</div>
+                                </div>
+                                
+                                <div class="size-btn" data-size="sm" onclick="selectSize('sm')">
+                                    <div class="size-name">Classic Portrait</div>
+                                    <div class="size-dimension">8x8 inches</div>
+                                    <div class="size-price">$300.00</div>
+                                </div>
+                                
+                                <div class="size-btn active" data-size="md" onclick="selectSize('md')">
+                                    <div class="size-name">Signature Collection</div>
+                                    <div class="size-dimension">8x10 inches</div>
+                                    <div class="size-price">$350.00</div>
+                                </div>
+                                
+                                <div class="size-btn" data-size="lg" onclick="selectSize('lg')">
+                                    <div class="size-name">Exhibition Size</div>
+                                    <div class="size-dimension">10x10 inches</div>
+                                    <div class="size-price">$400.00</div>
+                                </div>
+                                
+                                <div class="size-btn" data-size="xl" onclick="selectSize('xl')">
+                                    <div class="size-name">Companion Portrait</div>
+                                    <div class="size-dimension">Two Pets 10x10 inches (minimum size for 2 pets)</div>
+                                    <div class="size-price">$650.00</div>
+                                </div>
+
+                                <div class="size-btn" data-size="other" onclick="selectSize('other')">
+                                    <div class="size-name">Custom Size</div>
+                                    <div class="size-dimension">Don't see what you're looking for? Select for custom sizes or special requests</div>
+                                    <div class="size-price">Contact for Quote</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="background-color">Background Color</label>
+                            <select id="background-color" required>
+                                <option value="">Select background color</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="orange">Orange</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                                <option value="brown">Brown</option>
+                            </select>
+                            <p style="font-size: 13px; color: #666; margin-top: 8px;">Want a different color? Specify your preferred color in the Special Requests section below.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests or Notes (Optional)</label>
+                            <textarea id="specialRequests" name="specialRequests" class="form-control" placeholder="Please include any specific details about your pet or portrait that you'd like me to know. For example: Would you like your pet's name added to the portrait? Would you like a border design? Any specific color preferences not listed above?"></textarea>
+                        </div>
+                        
+                        <div class="full-width">
+                            <div class="price-display">
+                                Total: <span id="price">$449.00</span>
+                            </div>
+                            <p style="text-align: center; color: #666; font-size: 14px; margin-top: -20px;">Shipping is included in the price</p>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <div class="invoice-note">
+                                <h3>Payment Process</h3>
+                                <p>After reviewing your request, I'll send you a detailed invoice with payment instructions. This allows me to ensure I can create your portrait exactly as you envision it.</p>
+                                <p>Payment will be due upon receipt of the invoice, and I'll begin working on your portrait once payment is received.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-reminder">
+                        <h3>What Happens Next?</h3>
+                        <ul>
+                            <li>I'll review your request within 2-3 business days.</li>
+                            <li>If accepted, I'll send you a detailed invoice with payment instructions.</li>
+                            <li>Once payment is received, I'll begin creating your portrait within 2-3 weeks.</li>
+                            <li>You'll have the opportunity to request minor adjustments before final delivery.</li>
+                            <li>Your finished portrait will be carefully packaged and shipped to you.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="submission-note">
+                        By submitting this form, you authorize Shelby's Pet Portraits to create a custom artwork based on your provided photo. You confirm that you own the rights to the photo being submitted.
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Request Portrait Invoice</button>
+                    
+                    <div class="form-footer">
+                        If you have any questions before submitting, please <a href="contact.html" style="color: var(--primary);">contact me</a>.
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shelby's Pet Portraits</h3>
+                    <p>Turning cherished memories into handcrafted works of art that celebrate the special bond between you and your pet.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow on TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="commission-process.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Commission Process</a></p>
+                    <p><a href="faqs.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">FAQs</a></p>
+                    <p><a href="gallery.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Gallery</a></p>
+                    <p><a href="contact.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="far fa-envelope" style="margin-right: 10px;"></i> hello@shelbypetportraits.com</p>
+                    <p><i class="fab fa-tiktok" style="margin-right: 10px;"></i> @ShelbysPetPortraits</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Shelby's Pet Portraits. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle file upload UI
+            const uploadBtn = document.getElementById('uploadBtn');
+            const fileInput = document.getElementById('petPhoto');
+            const uploadedFile = document.getElementById('uploadedFile');
+            const fileName = document.getElementById('fileName');
+            const removeFile = document.getElementById('removeFile');
+            
+            uploadBtn.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length > 0) {
+                    fileName.textContent = fileInput.files[0].name;
+                    uploadedFile.style.display = 'block';
+                }
+            });
+            
+            removeFile.addEventListener('click', function() {
+                fileInput.value = '';
+                uploadedFile.style.display = 'none';
+            });
+            
+            // Handle drag and drop for file upload
+            uploadBtn.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                uploadBtn.style.backgroundColor = '#f0ebfa';
+            });
+            
+            uploadBtn.addEventListener('dragleave', function() {
+                uploadBtn.style.backgroundColor = '#f8f5ff';
+            });
+            
+            uploadBtn.addEventListener('drop', function(e) {
+                e.preventDefault();
+                uploadBtn.style.backgroundColor = '#f8f5ff';
+                
+                if (e.dataTransfer.files.length > 0) {
+                    fileInput.files = e.dataTransfer.files;
+                    fileName.textContent = fileInput.files[0].name;
+                    uploadedFile.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
