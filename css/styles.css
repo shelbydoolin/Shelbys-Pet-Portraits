@@ -116,6 +116,27 @@ header {
     opacity: 0.5;
 }
 
+.hero-portraits {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.hero-portraits img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.hero-portraits img:hover {
+    transform: translateY(-5px);
+}
+
 .portrait-sample {
     border-radius: 20px;
     overflow: hidden;
@@ -911,6 +932,16 @@ footer:before {
     
     .footer-section {
         flex-basis: 100%;
+    }
+    
+    .hero-portraits {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .hero-portraits img {
+        width: 200px;
+        height: 200px;
     }
 }
 
