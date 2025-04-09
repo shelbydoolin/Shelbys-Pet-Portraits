@@ -413,6 +413,38 @@
             background: linear-gradient(to bottom, transparent, var(--primary), transparent);
             transform: translateY(-50%);
         }
+        
+        .uploaded-files {
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #f8f5ff;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        
+        .file-item i {
+            color: var(--primary);
+        }
+        
+        .file-item .remove-file {
+            margin-left: auto;
+            color: #dc3545;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .file-item .remove-file:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -442,7 +474,22 @@
                 
                 <div id="payment-error"></div>
                 
-                <form id="commissionForm">
+                <form id="commissionForm" class="commission-form" action="https://formsubmit.co/shelbyspetpaintings@gmail.com" method="POST" enctype="multipart/form-data">
+                    <!-- Honeypot to prevent spam -->
+                    <input type="text" name="_honey" style="display: none;">
+                    <!-- Disable captcha -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <!-- Success page -->
+                    <input type="hidden" name="_next" value="https://shelbydoolin.github.io/Shelbys-Pet-Portraits/success.html">
+                    <!-- Email template -->
+                    <input type="hidden" name="_template" value="table">
+                    <!-- Email subject -->
+                    <input type="hidden" name="_subject" value="New Portrait Commission Request">
+                    <!-- Auto response -->
+                    <input type="hidden" name="_autoresponse" value="Thank you for your portrait commission request! I'll review your details and get back to you shortly.">
+                    <!-- File upload -->
+                    <input type="hidden" name="_file" value="true">
+
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="name">Your Name *</label>
@@ -456,20 +503,20 @@
                         
                         <div class="form-group">
                             <label for="petName">Pet's Name *</label>
-                            <input type="text" id="petName" name="petName" class="form-control" required>
+                            <input type="text" id="petName" name="Pet's Name" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="petPhoto">Upload a Photo of Your Pet *</label>
-                            <div class="upload-btn" id="uploadBtn">
-                                <span class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></span>
-                                <span class="upload-text">Click to choose a file or drag and drop</span>
+                            <label for="petPhoto">Pet Photo</label>
+                            <div class="file-upload">
+                                <input type="file" id="petPhoto" name="Pet Photos" accept="image/*" required multiple style="display: none;">
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('petPhoto').click()">
+                                    <i class="fas fa-upload"></i> Upload Photos
+                                </button>
+                                <span id="fileName">No files chosen</span>
+                                <div id="uploadedFiles" class="uploaded-files"></div>
                             </div>
-                            <input type="file" id="petPhoto" name="petPhoto" accept="image/*" style="display: none;" required>
-                            <div class="uploaded-file" id="uploadedFile">
-                                <span class="file-name" id="fileName"></span>
-                                <span class="remove-file" id="removeFile"><i class="fas fa-times"></i> Remove</span>
-                            </div>
+                            <small class="form-text">Please upload clear, well-lit photos of your pet. You can upload multiple photos to show different angles or expressions.</small>
                         </div>
                         
                         <div class="form-group full-width">
@@ -531,7 +578,7 @@
 
                         <div class="form-group">
                             <label for="specialRequests">Special Requests or Notes (Optional)</label>
-                            <textarea id="specialRequests" name="specialRequests" class="form-control" placeholder="Please include any specific details about your pet or portrait that you'd like me to know. For example: Would you like your pet's name added to the portrait? Would you like a border design? Any specific color preferences not listed above?"></textarea>
+                            <textarea id="specialRequests" name="Special Requests" rows="4" placeholder="Please include your pet's name and any border design preferences"></textarea>
                         </div>
                         
                         <div class="full-width">
@@ -553,10 +600,11 @@
                     <div class="process-reminder">
                         <h3>What Happens Next?</h3>
                         <ul>
-                            <li>I'll review your request within 2-3 business days.</li>
-                            <li>If accepted, I'll send you a detailed invoice with payment instructions.</li>
-                            <li>Once payment is received, I'll begin creating your portrait within 2-3 weeks.</li>
-                            <li>You'll have the opportunity to request minor adjustments before final delivery.</li>
+                            <li>You'll receive a confirmation email with your request details.</li>
+                            <li>I'll review your photo and confirm it's suitable for a portrait.</li>
+                            <li>I'll send you an invoice for the portrait.</li>
+                            <li>Once payment is received, I'll begin your portrait.</li>
+                            <li>You'll receive progress updates and a final photo for approval.</li>
                             <li>Your finished portrait will be carefully packaged and shipped to you.</li>
                         </ul>
                     </div>
@@ -609,47 +657,58 @@
     <script src="../js/scripts.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle file upload UI
-            const uploadBtn = document.getElementById('uploadBtn');
             const fileInput = document.getElementById('petPhoto');
-            const uploadedFile = document.getElementById('uploadedFile');
             const fileName = document.getElementById('fileName');
-            const removeFile = document.getElementById('removeFile');
-            
-            uploadBtn.addEventListener('click', function() {
-                fileInput.click();
-            });
-            
+            const uploadedFiles = document.getElementById('uploadedFiles');
+            const form = document.getElementById('commissionForm');
+
             fileInput.addEventListener('change', function() {
                 if (fileInput.files.length > 0) {
-                    fileName.textContent = fileInput.files[0].name;
-                    uploadedFile.style.display = 'block';
-                }
-            });
-            
-            removeFile.addEventListener('click', function() {
-                fileInput.value = '';
-                uploadedFile.style.display = 'none';
-            });
-            
-            // Handle drag and drop for file upload
-            uploadBtn.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                uploadBtn.style.backgroundColor = '#f0ebfa';
-            });
-            
-            uploadBtn.addEventListener('dragleave', function() {
-                uploadBtn.style.backgroundColor = '#f8f5ff';
-            });
-            
-            uploadBtn.addEventListener('drop', function(e) {
-                e.preventDefault();
-                uploadBtn.style.backgroundColor = '#f8f5ff';
-                
-                if (e.dataTransfer.files.length > 0) {
-                    fileInput.files = e.dataTransfer.files;
-                    fileName.textContent = fileInput.files[0].name;
-                    uploadedFile.style.display = 'block';
+                    fileName.textContent = `${fileInput.files.length} file(s) selected`;
+                    uploadedFiles.style.display = 'block';
+                    uploadedFiles.innerHTML = ''; // Clear previous files
+
+                    // Display each selected file
+                    Array.from(fileInput.files).forEach((file, index) => {
+                        const fileItem = document.createElement('div');
+                        fileItem.className = 'file-item';
+                        fileItem.innerHTML = `
+                            <i class="fas fa-image"></i>
+                            <span>${file.name}</span>
+                            <span class="remove-file" data-index="${index}">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        `;
+                        uploadedFiles.appendChild(fileItem);
+                    });
+
+                    // Add click handlers for remove buttons
+                    document.querySelectorAll('.remove-file').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const index = parseInt(this.dataset.index);
+                            const dt = new DataTransfer();
+                            const files = fileInput.files;
+                            
+                            for (let i = 0; i < files.length; i++) {
+                                if (i !== index) {
+                                    dt.items.add(files[i]);
+                                }
+                            }
+                            
+                            fileInput.files = dt.files;
+                            
+                            if (fileInput.files.length === 0) {
+                                fileName.textContent = 'No files chosen';
+                                uploadedFiles.style.display = 'none';
+                            } else {
+                                fileName.textContent = `${fileInput.files.length} file(s) selected`;
+                                this.parentElement.remove();
+                            }
+                        });
+                    });
+                } else {
+                    fileName.textContent = 'No files chosen';
+                    uploadedFiles.style.display = 'none';
                 }
             });
         });
